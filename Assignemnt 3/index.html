@@ -71,9 +71,11 @@
                 if (isLoggedIn) {
                     document.getElementById('profile').style.display='block';
                     document.getElementById('fbbtn').style.display='none';
+                    document.getElementById('logout').style.display='block';
                 } else {
                     document.getElementById('profile').style.display='none';
                     document.getElementById('fbbtn').style.display='block';
+                    document.getElementById('logout').style.display='none';
                 }
             }
 
@@ -89,14 +91,23 @@
               `
               document.getElementById('profile').innerHTML=profile;
             }
-            // var body = 'Reading JS SDK documentation';
-            // FB.api('/me/feed', 'post', { message: body }, function (response) {
-            //     if (!response || response.error) {
-            //         alert('Error occured');
-            //     } else {
-            //         alert('Post ID: ' + response.id);
-            //     }
-            // });
+
+
+            function logout(){
+                FB.logout(function(response){
+                    setElements(false);
+                });
+            }
+
+            //You need to get a reviewed facebook app with user post permission to work.
+            var body = 'Hello, This is a post from SSS_TEST app';
+            FB.api('/me/feed', 'post', { message: body }, function (response) {
+                if (!response || response.error) {
+                    alert('Error occured');
+                } else {
+                    alert('Post ID: ' + response.id);
+                }
+            });
         
     </script>
 
@@ -116,9 +127,14 @@
     <div class="collapse navbar-collapse" id="navbarResponsive">
       <ul class="navbar-nav ml-auto">
         <li class="nav-item active">
-            <div id="fbbtn" class="fb-login-button" data-max-rows="1" data-size="large" data-button-type="continue_with" data-show-faces="false"
-            data-auto-logout-link="false" data-use-continue-as="false"></div>
+
+                <fb:login-button scope="id,name,email,cover"    onlogin='window.location="http://yourdomain.com/yourpage.php";'>Connect with Facebook</fb:login-button>
+
+           <!-- <div id="fbbtn" class="fb-login-button" data-max-rows="1" data-size="large" data-button-type="continue_with" data-show-faces="false"
+            data-auto-logout-link="false" data-use-continue-as="false" onclick="checkLoginState"></div>-->
+            
         </li>
+        <li><a id="logout" onclick="logout()" href="#" style="color:wheat;">Logout</a></li>
 
       </ul>
     </div>
@@ -129,46 +145,13 @@
 <div class="container">
 
   <div class="row">
-  
-    <div class="col-lg-3">
+  <div class="col-lg-4"></div>
+    <div class="col-lg-4">
         <div id="profile"></div>
     </div>
     <!-- /.col-lg-3 -->
 
-    <div class="col-lg-9">
-
-      <div class="card mt-4">
-        <img class="card-img-top img-fluid" src="http://placehold.it/900x400" alt="">
-        <div class="card-body">
-          <h3 class="card-title">Product Name</h3>
-          <h4>$24.99</h4>
-          <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sapiente dicta fugit fugiat hic aliquam itaque facere, soluta. Totam id dolores, sint aperiam sequi pariatur praesentium animi perspiciatis molestias iure, ducimus!</p>
-          <span class="text-warning">&#9733; &#9733; &#9733; &#9733; &#9734;</span>
-          4.0 stars
-        </div>
-      </div>
-      <!-- /.card -->
-
-      <div class="card card-outline-secondary my-4">
-        <div class="card-header">
-          Product Reviews
-        </div>
-        <div class="card-body">
-          <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Omnis et enim aperiam inventore, similique necessitatibus neque non! Doloribus, modi sapiente laboriosam aperiam fugiat laborum. Sequi mollitia, necessitatibus quae sint natus.</p>
-          <small class="text-muted">Posted by Anonymous on 3/1/17</small>
-          <hr>
-          <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Omnis et enim aperiam inventore, similique necessitatibus neque non! Doloribus, modi sapiente laboriosam aperiam fugiat laborum. Sequi mollitia, necessitatibus quae sint natus.</p>
-          <small class="text-muted">Posted by Anonymous on 3/1/17</small>
-          <hr>
-          <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Omnis et enim aperiam inventore, similique necessitatibus neque non! Doloribus, modi sapiente laboriosam aperiam fugiat laborum. Sequi mollitia, necessitatibus quae sint natus.</p>
-          <small class="text-muted">Posted by Anonymous on 3/1/17</small>
-          <hr>
-          <a href="#" class="btn btn-success">Leave a Review</a>
-        </div>
-      </div>
-      <!-- /.card -->
-
-    </div>
+ 
     <!-- /.col-lg-9 -->
 
   </div>
@@ -179,7 +162,7 @@
 <!-- Footer -->
 <footer class="py-5 bg-dark">
   <div class="container">
-    <p class="m-0 text-center text-white">Copyright &copy; Your Website 2017</p>
+    <p class="m-0 text-center text-white">Copyright &copy; SSS Facebook Login 2018</p>
   </div>
   <!-- /.container -->
 </footer>
