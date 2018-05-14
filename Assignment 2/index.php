@@ -12,10 +12,11 @@ if (empty($_SESSION['token'])) {
 
     $_SESSION['token'] = bin2hex(openssl_random_pseudo_bytes(32));
 
-    global $token = $_SESSION['token'];
+    $token = $_SESSION['token'];
+    setcookie("csr_token", $token, time() + (440), "/", "localhost", false, true);
 }
 setcookie("s_id", $s_id, time() + (1440), "/", "localhost", false, true);
-setcookie("csr_token", $token, time() + (440), "/", "localhost", false, true);
+
 
 
 
