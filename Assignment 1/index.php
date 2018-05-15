@@ -30,7 +30,7 @@ session_start();
         
    }
     ?>
-    <input type="hidden" name="csr" value="<?php echo $_SESSION['token']?>">
+    <input type="hidden" name="csr" value="<?php echo $_SESSION['token']; ?>">
     
     <input type="submit" value="Login"/>
 <div id="success"></div>
