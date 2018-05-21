@@ -44,6 +44,8 @@
             fjs.parentNode.insertBefore(js, fjs);
         }(document, 'script', 'facebook-jssdk'));
 
+        
+        //Check if the user is already connected to the app.
         function statusChangeCallback(response) {
             if (response.status === 'connected') {
                 console.log('Logged in');
@@ -57,16 +59,20 @@
             }
         }
 
+        
+        //get Facebook profile information 
         function FBAPI() {
-            FB.api('me?fields=id,name,email,cover', function (response) {
+            FB.api('me?fields=id,name,email', function (response) {
                 if (response && !response.error) {
                     console.log(response);
+                    //Passing the json object 
                     showprofile(response);
                 }
             })
            
         }
 
+        //Show elements according to the login status
          function setElements(isLoggedIn) {
                 if (isLoggedIn) {
                     document.getElementById('profile').style.display='block';
@@ -79,6 +85,7 @@
                 }
             }
 
+        //This will show the profile details using html
             function showprofile(user){
               let profile=`
               <br />
